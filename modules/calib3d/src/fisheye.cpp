@@ -752,10 +752,14 @@ double cv::fisheye::calibrate(InputArrayOfArrays objectPoints, InputArrayOfArray
         D.getMat().convertTo(_D, CV_64FC1);
         finalParam.Init(Vec2d(_K(0,0), _K(1, 1)),
                         Vec2d(_K(0,2), _K(1, 2)),
-                        Vec4d(flags & CALIB_FIX_K1 ? 0 : _D[0],
-                              flags & CALIB_FIX_K2 ? 0 : _D[1],
-                              flags & CALIB_FIX_K3 ? 0 : _D[2],
-                              flags & CALIB_FIX_K4 ? 0 : _D[3]),
+                        Vec4d(_D[0],
+                              _D[1],
+                              _D[2],
+                              _D[3]),
+                        //Vec4d(flags & CALIB_FIX_K1 ? 0 : _D[0],
+                              //flags & CALIB_FIX_K2 ? 0 : _D[1],
+                              //flags & CALIB_FIX_K3 ? 0 : _D[2],
+                              //flags & CALIB_FIX_K4 ? 0 : _D[3]),
                         _K(0, 1) / _K(0, 0));
     }
     else
